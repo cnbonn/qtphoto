@@ -26,10 +26,6 @@ QT_BEGIN_NAMESPACE
 class Ui_MainWindow
 {
 public:
-    QAction *actionOpen;
-    QAction *actionPrint;
-    QAction *actionQuit;
-    QAction *actionQuit_2;
     QAction *actionNew;
     QAction *actionOpen_2;
     QAction *actionClose;
@@ -64,22 +60,23 @@ public:
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
         MainWindow->resize(400, 300);
-        actionOpen = new QAction(MainWindow);
-        actionOpen->setObjectName(QStringLiteral("actionOpen"));
-        actionPrint = new QAction(MainWindow);
-        actionPrint->setObjectName(QStringLiteral("actionPrint"));
-        actionQuit = new QAction(MainWindow);
-        actionQuit->setObjectName(QStringLiteral("actionQuit"));
-        actionQuit_2 = new QAction(MainWindow);
-        actionQuit_2->setObjectName(QStringLiteral("actionQuit_2"));
         actionNew = new QAction(MainWindow);
         actionNew->setObjectName(QStringLiteral("actionNew"));
+        QIcon icon;
+        icon.addFile(QStringLiteral("Icons/new.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionNew->setIcon(icon);
         actionOpen_2 = new QAction(MainWindow);
         actionOpen_2->setObjectName(QStringLiteral("actionOpen_2"));
+        QIcon icon1;
+        icon1.addFile(QStringLiteral("Icons/open.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionOpen_2->setIcon(icon1);
         actionClose = new QAction(MainWindow);
         actionClose->setObjectName(QStringLiteral("actionClose"));
         actionSave = new QAction(MainWindow);
         actionSave->setObjectName(QStringLiteral("actionSave"));
+        QIcon icon2;
+        icon2.addFile(QStringLiteral("Icons/copy.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionSave->setIcon(icon2);
         actionSave_As = new QAction(MainWindow);
         actionSave_As->setObjectName(QStringLiteral("actionSave_As"));
         actionQuit_3 = new QAction(MainWindow);
@@ -88,6 +85,9 @@ public:
         actionAdd_photo->setObjectName(QStringLiteral("actionAdd_photo"));
         actionDelete_photo = new QAction(MainWindow);
         actionDelete_photo->setObjectName(QStringLiteral("actionDelete_photo"));
+        QIcon icon3;
+        icon3.addFile(QStringLiteral("Icons/delete.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionDelete_photo->setIcon(icon3);
         actionEdit_description = new QAction(MainWindow);
         actionEdit_description->setObjectName(QStringLiteral("actionEdit_description"));
         actionPage_forward = new QAction(MainWindow);
@@ -96,8 +96,14 @@ public:
         actionPage_backward->setObjectName(QStringLiteral("actionPage_backward"));
         actionMove_forward = new QAction(MainWindow);
         actionMove_forward->setObjectName(QStringLiteral("actionMove_forward"));
+        QIcon icon4;
+        icon4.addFile(QStringLiteral("Icons/arrow-right.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionMove_forward->setIcon(icon4);
         actionMove_backward = new QAction(MainWindow);
         actionMove_backward->setObjectName(QStringLiteral("actionMove_backward"));
+        QIcon icon5;
+        icon5.addFile(QStringLiteral("Icons/arrow-left.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionMove_backward->setIcon(icon5);
         actionCrop = new QAction(MainWindow);
         actionCrop->setObjectName(QStringLiteral("actionCrop"));
         actionResize = new QAction(MainWindow);
@@ -106,6 +112,9 @@ public:
         actionUsage->setObjectName(QStringLiteral("actionUsage"));
         actionAbout = new QAction(MainWindow);
         actionAbout->setObjectName(QStringLiteral("actionAbout"));
+        QIcon icon6;
+        icon6.addFile(QStringLiteral("Icons/help.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionAbout->setIcon(icon6);
         actionContrast = new QAction(MainWindow);
         actionContrast->setObjectName(QStringLiteral("actionContrast"));
         actionBrightness = new QAction(MainWindow);
@@ -130,6 +139,7 @@ public:
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
         MainWindow->addToolBar(Qt::TopToolBarArea, mainToolBar);
+        MainWindow->insertToolBarBreak(mainToolBar);
         statusBar = new QStatusBar(MainWindow);
         statusBar->setObjectName(QStringLiteral("statusBar"));
         MainWindow->setStatusBar(statusBar);
@@ -162,6 +172,17 @@ public:
         menuBalance->addAction(actionBrightness);
         menuHelp->addAction(actionUsage);
         menuHelp->addAction(actionAbout);
+        mainToolBar->addSeparator();
+        mainToolBar->addAction(actionOpen_2);
+        mainToolBar->addAction(actionSave);
+        mainToolBar->addAction(actionDelete_photo);
+        mainToolBar->addSeparator();
+        mainToolBar->addAction(actionEdit_description);
+        mainToolBar->addSeparator();
+        mainToolBar->addAction(actionMove_forward);
+        mainToolBar->addAction(actionMove_backward);
+        mainToolBar->addSeparator();
+        mainToolBar->addAction(actionAbout);
 
         retranslateUi(MainWindow);
 
@@ -171,12 +192,10 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0));
-        actionOpen->setText(QApplication::translate("MainWindow", "Open", 0));
-        actionPrint->setText(QApplication::translate("MainWindow", "Print", 0));
-        actionQuit->setText(QApplication::translate("MainWindow", "Quit", 0));
-        actionQuit_2->setText(QApplication::translate("MainWindow", "Quit", 0));
         actionNew->setText(QApplication::translate("MainWindow", "New", 0));
+        actionNew->setShortcut(QApplication::translate("MainWindow", "Ctrl+N", 0));
         actionOpen_2->setText(QApplication::translate("MainWindow", "Open", 0));
+        actionOpen_2->setShortcut(QApplication::translate("MainWindow", "Ctrl+O", 0));
         actionClose->setText(QApplication::translate("MainWindow", "Close", 0));
         actionSave->setText(QApplication::translate("MainWindow", "Save", 0));
         actionSave_As->setText(QApplication::translate("MainWindow", "Save As", 0));
