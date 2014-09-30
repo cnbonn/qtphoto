@@ -1,21 +1,28 @@
-#-------------------------------------------------
-#
-# Project created by QtCreator 2014-09-28T19:30:23
-#
-#-------------------------------------------------
+HEADERS       = imageviewer.h
+SOURCES       = imageviewer.cpp \
+                main.cpp
 
-QT       += core gui
+# install
+target.path = $$[QT_INSTALL_EXAMPLES]/widgets/imageviewer
+sources.files = $$SOURCES $$HEADERS $$RESOURCES $$FORMS imageviewer.pro
+sources.path = $$[QT_INSTALL_EXAMPLES]/widgets/imageviewer
+INSTALLS += target sources
+
+symbian: include($$QT_SOURCE_TREE/examples/symbianpkgrules.pri)
+
+#Symbian has built-in component named imageviewer so we use different target
+symbian: TARGET = imageviewerexample
+
+wince*: {
+   DEPLOYMENT_PLUGIN += qjpeg qmng qgif
+}
+maemo5: include($$QT_SOURCE_TREE/examples/maemo5pkgrules.pri)
+
+symbian: warning(This example might not fully work on Symbian platform)
+maemo5: warning(This example might not fully work on Maemo platform)
+simulator: warning(This example might not fully work on Simulator platform)
+
+QT += printsupport
+
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
-
-TARGET = photo
-TEMPLATE = app
-
-
-SOURCES += main.cpp \
-    imageviewer.cpp
-
-HEADERS  += \
-    imageviewer.h
-
-FORMS    += mainwindow.ui
