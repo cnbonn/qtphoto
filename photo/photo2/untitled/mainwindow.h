@@ -9,17 +9,21 @@ class MainWindow;
 
 class MainWindow : public QMainWindow
 {
-    Q_OBJECT
+Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = 0);
+explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
 private slots:
+    void createActions();
+    void about();
     void on_pushButton_pressed();
 
 private:
-    Ui::MainWindow *ui;
-};
+Ui::MainWindow *ui;
 
+    QAction *aboutAct;
+    QAction *aboutQtAct;
+};
 #endif // MAINWINDOW_H
