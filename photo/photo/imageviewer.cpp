@@ -44,7 +44,7 @@
 #include <QtPrintSupport>
 #include "imageviewer.h"
 
-//! [0]
+
 ImageViewer::ImageViewer()
 {
     imageLabel = new QLabel;
@@ -66,8 +66,13 @@ ImageViewer::ImageViewer()
 //! [0]
 
 //! [1]
+void ImageViewer::newAlbum()
+{
+
+}
+
 void ImageViewer::open()
-//! [1] //! [2]
+
 {
     QString fileName = QFileDialog::getOpenFileName(this,
                                     tr("Open File"), QDir::currentPath());
@@ -78,9 +83,9 @@ void ImageViewer::open()
                                      tr("Cannot load %1.").arg(fileName));
             return;
         }
-//! [2] //! [3]
+
         imageLabel->setPixmap(QPixmap::fromImage(image));
-//! [3] //! [4]
+
         scaleFactor = 1.0;
 
         printAct->setEnabled(true);
@@ -91,17 +96,27 @@ void ImageViewer::open()
             imageLabel->adjustSize();
     }
 }
-//! [4]
 
-//! [5]
+void ImageViewer::close()
+{
+
+}
+
+void ImageViewer::save()
+{
+}
+
+void ImageViewer::saveAs()
+{
+}
+
 void ImageViewer::print()
-//! [5] //! [6]
+
 {
     Q_ASSERT(imageLabel->pixmap());
 #ifndef QT_NO_PRINTER
-//! [6] //! [7]
+
     QPrintDialog dialog(&printer, this);
-//! [7] //! [8]
     if (dialog.exec()) {
         QPainter painter(&printer);
         QRect rect = painter.viewport();
@@ -113,9 +128,32 @@ void ImageViewer::print()
     }
 #endif
 }
-//! [8]
 
-//! [9]
+void ImageViewer::addPhoto()
+{
+
+}
+
+void ImageViewer::deletephoto()
+{
+
+}
+
+void ImageViewer::editDescript()
+{
+
+}
+
+void ImageViewer::pageForward()
+{
+
+}
+
+void ImageViewer::pageBackward()
+{
+
+}
+
 void ImageViewer::zoomIn()
 //! [9] //! [10]
 {
@@ -214,45 +252,60 @@ void ImageViewer::createActions()
     aboutQtAct = new QAction(tr("About &Qt"), this);
     connect(aboutQtAct, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
 }
-//! [18]
 
-//! [19]
 void ImageViewer::createMenus()
-//! [19] //! [20]
 {
     fileMenu = new QMenu(tr("&File"), this);
+    //fileMenu->addAction(newAlbumAct);
+    //fileMenu->addSeparator();
     fileMenu->addAction(openAct);
-    fileMenu->addAction(printAct);
-    fileMenu->addSeparator();
+    //fileMenu->addAction(closeAct);
+    //fileMenu->addSeparator();
+    //fileMenu->addAction(saveAct);
+    //fileMenu->addAction(saveAsAct);
+    //fileMenu->addSeparator();
     fileMenu->addAction(exitAct);
 
-    fileMenu = new QMenu(tr("&Edit"), this);
-    fileMenu -> addAction(addPhotoAct);
-    fileMenu -> addAction(deletePhotoAct);
-    fileMenu -> addAction(editDescriptAct);
-    fileMenu -> addAction(pageForwardAct);
-    fileMenu -> addAction(pageBackwardAct);
+    editMenu = new QMenu(tr("&Edit"), this);
+    //editMenu->addAction(addPhotoAct);
+    //editMenu->addAction(deletePhotoAct);
+    //editMenu->addSeparator();
+    //editMenu->addAction(editDescriptAct);
+    //editMenu->addSeparator();
+    //editMenu->addAction(pageForwardAct);
+    //editMenu->addAction(pageBackwardAct);
 
-    viewMenu = new QMenu(tr("&Image"), this);
-    viewMenu->addAction(zoomInAct);
-    viewMenu->addAction(zoomOutAct);
-    viewMenu->addAction(normalSizeAct);
-    viewMenu->addSeparator();
-    viewMenu->addAction(fitToWindowAct);
+    imageMenu = new QMenu(tr("&Image"), this);
+    imageMenu->addAction(zoomInAct);
+    imageMenu->addAction(zoomOutAct);
+    imageMenu->addAction(normalSizeAct);
+    imageMenu->addSeparator();
+    imageMenu->addAction(fitToWindowAct);
 
     helpMenu = new QMenu(tr("&Help"), this);
     helpMenu->addAction(aboutAct);
     helpMenu->addAction(aboutQtAct);
 
     menuBar()->addMenu(fileMenu);
-    menuBar()->addMenu(viewMenu);
+    menuBar()->addMenu(editMenu);
+    menuBar()->addMenu(imageMenu);
     menuBar()->addMenu(helpMenu);
 }
-//! [20]
 
-//! [21]
+void ImageViewer::createToolBars()
+{
+    fileToolBar = addToolBar(tr("File"));
+   // fileToolBar->addAction(newAct);
+    fileToolBar->addAction(openAct);
+
+   // fileToolBar->addAction(saveAct);
+
+    editToolBar = addToolBar(tr("Edit"));
+   // editToolBar->addAction(cutAct);
+    //editToolBar->addAction(copyAct);
+    //editToolBar->addAction(pasteAct);
+}
 void ImageViewer::updateActions()
-//! [21] //! [22]
 {
     zoomInAct->setEnabled(!fitToWindowAct->isChecked());
     zoomOutAct->setEnabled(!fitToWindowAct->isChecked());
@@ -260,9 +313,8 @@ void ImageViewer::updateActions()
 }
 //! [22]
 
-//! [23]
+
 void ImageViewer::scaleImage(double factor)
-//! [23] //! [24]
 {
     Q_ASSERT(imageLabel->pixmap());
     scaleFactor *= factor;
@@ -274,13 +326,12 @@ void ImageViewer::scaleImage(double factor)
     zoomInAct->setEnabled(scaleFactor < 3.0);
     zoomOutAct->setEnabled(scaleFactor > 0.333);
 }
-//! [24]
 
-//! [25]
+
+
 void ImageViewer::adjustScrollBar(QScrollBar *scrollBar, double factor)
-//! [25] //! [26]
 {
     scrollBar->setValue(int(factor * scrollBar->value()
                             + ((factor - 1) * scrollBar->pageStep()/2)));
 }
-//! [26]
+

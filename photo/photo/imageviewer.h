@@ -65,17 +65,31 @@ public:
     ImageViewer();
 
 private slots:
-    void open();
+    //file menu
+    void newAlbum();
     void print();
+    void open();
+    void close();
+    void save();
+    void saveAs();
+    //edit menu
+    void addPhoto();
+    void deletephoto();
+    void editDescript();
+    void pageForward();
+    void pageBackward();
+
     void zoomIn();
     void zoomOut();
     void normalSize();
     void fitToWindow();
+
     void about();
 
 private:
     void createActions();
     void createMenus();
+    void createToolBars();
     void updateActions();
     void scaleImage(double factor);
     void adjustScrollBar(QScrollBar *scrollBar, double factor);
@@ -88,24 +102,37 @@ private:
     QPrinter printer;
 #endif
 
+    QMenu *fileMenu;
+    QMenu *editMenu;
+    QMenu *imageMenu;
+    QMenu *helpMenu;
+
+    //QAction *newAlbumAct;
     QAction *openAct;
     QAction *printAct;
+    //QAction *closeAct;
+    //QAction *saveAct;
+    //QAction *saveAsAct;
     QAction *exitAct;
-    QAction *addPhotoAct;
-    QAction *deletePhotoAct;
-    QAction *editDescriptAct;
-    QAction *pageForwardAct;
-    QAction *pageBackwardAct;
+
+    //QAction *addPhotoAct;
+    //QAction *deletePhotoAct;
+    //QAction *editDescriptAct;
+    //QAction *pageForwardAct;
+    //QAction *pageBackwardAct;
+
     QAction *zoomInAct;
     QAction *zoomOutAct;
     QAction *normalSizeAct;
     QAction *fitToWindowAct;
+
     QAction *aboutAct;
     QAction *aboutQtAct;
 
-    QMenu *fileMenu;
-    QMenu *viewMenu;
-    QMenu *helpMenu;
+    QToolBar *fileToolBar;
+    QToolBar *editToolBar;
+
+
 };
 //! [0]
 
