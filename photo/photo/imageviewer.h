@@ -69,7 +69,7 @@ private slots:
     void newAlbum();
     void print();
     void open();
-    void close();
+    //void close();
     void save();
     void saveAs();
     //edit menu
@@ -105,6 +105,7 @@ private:
     QMenu *fileMenu;
     QMenu *editMenu;
     QMenu *imageMenu;
+    QMenu *moveMenu;
     QMenu *helpMenu;
 
     //QAction *newAlbumAct;
@@ -118,8 +119,8 @@ private:
     //QAction *addPhotoAct;
     //QAction *deletePhotoAct;
     //QAction *editDescriptAct;
-    //QAction *pageForwardAct;
-    //QAction *pageBackwardAct;
+    QAction *pageForwardAct;
+    QAction *pageBackwardAct;
 
     QAction *zoomInAct;
     QAction *zoomOutAct;
@@ -130,7 +131,14 @@ private:
     QAction *aboutQtAct;
 
     QToolBar *fileToolBar;
+    QToolBar *zoomToolBar;
     QToolBar *editToolBar;
+    QToolBar *moveToolBar;
+    QToolBar *helpToolBar;
+
+    QIcon *aboutIcon;
+
+
 
 
 };

@@ -41,6 +41,7 @@
 #include <QtGui>
 
 #include <QtWidgets>
+#include <QIcon>
 #include <QtPrintSupport>
 #include "imageviewer.h"
 
@@ -59,6 +60,7 @@ ImageViewer::ImageViewer()
 
     createActions();
     createMenus();
+    createToolBars();
 
     setWindowTitle(tr("Image Viewer"));
     resize(500, 400);
@@ -97,10 +99,11 @@ void ImageViewer::open()
     }
 }
 
-void ImageViewer::close()
-{
+// keep for save before quit
+//void ImageViewer::close()
+//{
 
-}
+//}
 
 void ImageViewer::save()
 {
@@ -223,6 +226,7 @@ void ImageViewer::createActions()
 
     exitAct = new QAction(tr("E&xit"), this);
     exitAct->setShortcut(tr("Ctrl+Q"));
+    exitAct->setStatusTip(tr("Exit the application"));
     connect(exitAct, SIGNAL(triggered()), this, SLOT(close()));
 
     zoomInAct = new QAction(tr("Zoom &In (25%)"), this);
@@ -295,15 +299,31 @@ void ImageViewer::createMenus()
 void ImageViewer::createToolBars()
 {
     fileToolBar = addToolBar(tr("File"));
-   // fileToolBar->addAction(newAct);
     fileToolBar->addAction(openAct);
+    //fileToolBar->addAction(saveAct);
+    //fileToolBar->addAction(deleteAct);
 
-   // fileToolBar->addAction(saveAct);
+
+    zoomToolBar = addToolBar(tr("Zoom"));
+    zoomToolBar->addAction(zoomInAct);
+    zoomToolBar->addAction(zoomOutAct);
+    //zoomToolBar->addACtion(editDescriptAct);
+
+    moveToolBar = addToolBar(tr("Move"));
+    //moveToolBar->addAction(pageForwardAct);
+   //moveToolBar->addAction(pageBackwardAct);
+
 
     editToolBar = addToolBar(tr("Edit"));
    // editToolBar->addAction(cutAct);
     //editToolBar->addAction(copyAct);
     //editToolBar->addAction(pasteAct);
+
+    helpToolBar = addToolBar((tr("Help")));
+   // QPixmap helpPix(":/icons/help.png");
+    //QIcon aboutIcon = QIcon::fromTheme("Help", QIcon(":/icons/help.png"));
+    helpToolBar->addAction(aboutAct);
+
 }
 void ImageViewer::updateActions()
 {
